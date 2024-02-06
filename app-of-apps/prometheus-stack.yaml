@@ -4,6 +4,7 @@ metadata:
   name: prometheus-stack
   namespace: argocd
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
@@ -16,7 +17,7 @@ spec:
         - $values/app-of-apps/prom-stack-files/prometheus-values.yaml
         # - $values/app-of-apps/prom-stack-files/prometheus-service-monitor.yaml
 
-    - repoURL: git@github.com:liormilliger/Portfolio-config.git
+    - repoURL: git@github.com:barrozz/argoCD-discovery.git
       targetRevision: main
       ref: values
 

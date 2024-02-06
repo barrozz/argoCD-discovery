@@ -8,16 +8,19 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:liormilliger/Portfolio-config.git
-    targetRevision: main
+    repoURL: git@github.com:barrozz/argoCD-discovery.git
+    targetRevision: HEAD
     path: "app-of-apps"
+
   destination:
     server: https://kubernetes.default.svc
     namespace: default
+
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
     - ServerSideApply=true
+
     automated:
       selfHeal: true
       prune: true

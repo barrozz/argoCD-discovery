@@ -5,7 +5,7 @@ metadata:
   namespace: kube-prometheus-stack
   annotations:
     argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "10"
   labels:
     release: prometheus
 spec:
@@ -19,4 +19,3 @@ spec:
   namespaceSelector:
     matchNames:
     - default
-    

@@ -1,0 +1,20 @@
+blogapp:
+  appName: blog
+  appPort: 5000
+  appPortName: webapp
+  appSvcName: blog-service
+
+mongodb:
+  mongoApp: mongo
+  mongoSvc: mongodb
+  mongoPort: 27017
+  mongoPV: mongo-data
+
+configmap:
+  cmName: blog-conf
+
+mongopv:
+  volSize: "150Mi"
+  scType: gp2
+  accessMode: ReadWriteMany
+Replicas: 1

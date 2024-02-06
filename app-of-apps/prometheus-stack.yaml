@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-stack
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: "56.3.0"
+      helm:
+        valueFiles:
+        - $values/app-of-apps/prom-stack-files/prometheus-values.yaml
+        # - $values/app-of-apps/prom-stack-files/prometheus-service-monitor.yaml
+
+    - repoURL: git@github.com:liormilliger/Portfolio-config.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-prometheus-stack
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    automated:
+      selfHeal: true
+      prune: true

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog-app
+  labels:
+    app: {{ .Values.blogapp.appName }}
+spec:
+  replicas: {{ .Values.Replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Values.blogapp.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.blogapp.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.blogapp.appName }}
+        image: 644435390668.dkr.ecr.us-east-1.amazonaws.com/liorm-portfolio:1.0.86
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.configmap.cmName }}
+        ports:
+        - containerPort: {{ .Values.blogapp.appPort | default 5000 }}
+          name: {{ .Values.blogapp.appPortName }}

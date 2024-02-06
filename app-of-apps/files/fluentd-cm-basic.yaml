@@ -1,0 +1,18 @@
+<source>
+  @type your_input_plugin
+  # Add your input plugin configuration here
+</source>
+
+<filter your_filter_tag>
+  @type parser
+  key_name message
+  reserve_data true
+  <parse>
+    @type json
+  </parse>
+</filter>
+
+<match your_output_tag>
+  @type your_output_plugin
+  # Add your output plugin configuration here
+</match>

@@ -1,24 +1,24 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: prometheus-service-monitor
-  namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
-spec:
-  project: default
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: prometheus-service-monitor
+#   namespace: argocd
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "2"
+# spec:
+#   project: default
 
-  source:
-    repoURL: git@github.com:liormilliger/Portfolio-config.git
-    targetRevision: main
-    path: "app-of-apps/prom-stack-files/prometheus-service-monitor.yaml" # Path to your ServiceMonitor manifest
+#   source:
+#     repoURL: git@github.com:liormilliger/Portfolio-config.git
+#     targetRevision: main
+#     path: "app-of-apps/prom-stack-files/prometheus-service-monitor.yaml" # Path to your ServiceMonitor manifest
 
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: kube-prometheus-stack # Namespace where the ServiceMonitor should be deployed
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: kube-prometheus-stack # Namespace where the ServiceMonitor should be deployed
 
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
 

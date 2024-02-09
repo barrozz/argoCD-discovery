@@ -16,7 +16,7 @@ metadata:
     # https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#hook-deletion-policies
     # hooks can be deleted in an automatic fashion using the annotation `hook-delete-policy`
     # HookSucceeded : The hook resource is deleted after the hook succeeded (e.g. Job/Workflow completed successfully)
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    # argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   project: default
   sources:

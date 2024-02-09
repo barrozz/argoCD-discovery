@@ -4,8 +4,19 @@ metadata:
   name: prometheus-stack
   namespace: argocd
   annotations:
-    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "1"
+    # /!\ if you use job/cronjob + ttlSecondsAfterFinished with argocd, argocd will instantly recreate the job.
+    # because the desired state differs from the new current state (argocd ignore your `ttlSecondsAfterFinished` declaration)
+    # to resolve this use : `hook: Sync` + `hook-delete-policy: HookSucceeded`
+    # https://serverfault.com/a/1112049
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#usage
+    # hooks are simply Kubernetes manifests tracked in the source repository of your Argo CD Application using the annotation `hook`
+    # Sync : Executes after all PreSync hooks completed and were successful, at the same time as the application of the manifests.
+    argocd.argoproj.io/hook: Sync
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#hook-deletion-policies
+    # hooks can be deleted in an automatic fashion using the annotation `hook-delete-policy`
+    # HookSucceeded : The hook resource is deleted after the hook succeeded (e.g. Job/Workflow completed successfully)
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   project: default
   sources:
@@ -15,7 +26,6 @@ spec:
       helm:
         valueFiles:
         - $values/app-of-apps/prom-stack-files/prometheus-values.yaml
-        # - $values/app-of-apps/prom-stack-files/prometheus-service-monitor.yaml
 
     - repoURL: git@github.com:barrozz/argoCD-discovery.git
       targetRevision: HEAD

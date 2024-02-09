@@ -12,7 +12,7 @@ metadata:
     # https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#usage
     # hooks are simply Kubernetes manifests tracked in the source repository of your Argo CD Application using the annotation `hook`
     # Sync : Executes after all PreSync hooks completed and were successful, at the same time as the application of the manifests.
-    argocd.argoproj.io/hook: Sync
+    # argocd.argoproj.io/hook: Sync
     # https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#hook-deletion-policies
     # hooks can be deleted in an automatic fashion using the annotation `hook-delete-policy`
     # HookSucceeded : The hook resource is deleted after the hook succeeded (e.g. Job/Workflow completed successfully)
